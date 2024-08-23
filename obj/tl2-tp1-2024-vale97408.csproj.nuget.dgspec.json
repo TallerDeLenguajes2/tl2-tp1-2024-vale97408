@@ -1,0 +1,66 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\vale9\\tpclassroom\\Taller de Lenguajes II\\tl2-tp1-2024-vale97408\\tl2-tp1-2024-vale97408.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\vale9\\tpclassroom\\Taller de Lenguajes II\\tl2-tp1-2024-vale97408\\tl2-tp1-2024-vale97408.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\vale9\\tpclassroom\\Taller de Lenguajes II\\tl2-tp1-2024-vale97408\\tl2-tp1-2024-vale97408.csproj",
+        "projectName": "tl2-tp1-2024-vale97408",
+        "projectPath": "C:\\Users\\vale9\\tpclassroom\\Taller de Lenguajes II\\tl2-tp1-2024-vale97408\\tl2-tp1-2024-vale97408.csproj",
+        "packagesPath": "C:\\Users\\vale9\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\vale9\\tpclassroom\\Taller de Lenguajes II\\tl2-tp1-2024-vale97408\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\vale9\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
