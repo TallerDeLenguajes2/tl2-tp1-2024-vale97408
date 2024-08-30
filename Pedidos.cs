@@ -1,3 +1,10 @@
+public enum estado
+{
+    EnPreparacion,
+    EnCamino,
+    Entregado
+}
+
 public class Pedidos
 {
     private int nroPedido;
@@ -9,5 +16,18 @@ public class Pedidos
     public string Obs { get => obs; set => obs = value; }
     public Cliente Cliente { get => cliente; set => cliente = value; }
     public string Estado { get => estado; set => estado = value; }
+
+    public void VerDireccionCliente()
+    {
+         
+
+    
+    
+    }
+
+    public void VerDatosCliente()
+    {
+        
+    }
 }
 
