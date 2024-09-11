@@ -11,8 +11,10 @@ public class Cadete
     public string Nombre { get => nombre; set => nombre = value; }
     public string Direccion { get => direccion; set => direccion = value; }
     public string Telefono { get => telefono; set => telefono = value; }
+    
+    // Cantidad de pedidos
 
-    public void JornarACobrar()
+    public void JornalACobrar()
     {
         
     }

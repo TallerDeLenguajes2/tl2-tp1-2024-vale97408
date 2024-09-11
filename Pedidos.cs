@@ -18,16 +18,13 @@ public class Pedidos
     public string Estado { get => estado; set => estado = value; }
 
     public void VerDireccionCliente()
-    {
-         
-
-    
-    
+    {         
+        
     }
 
     public void VerDatosCliente()
     {
-        
+
     }
 }
 
