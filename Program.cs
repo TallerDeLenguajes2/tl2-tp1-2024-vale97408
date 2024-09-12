@@ -1,2 +1,2 @@
 ﻿
-Console.WriteLine("Probando programa");
+Console.WriteLine(" ======================SISTEMA DE CADETERIA=========================");

@@ -10,13 +10,17 @@ Por otro lado, entre las relaciones realizadas por *agregación* tenemos la de P
 #### *¿Qué métodos considera que debería tener la clase Cadetería y la clase Cadete?*
     La clase Cadetería deberia tener los métodos: 
 - Asignar Pedido
-
+- Reasignar Pedidos
+- Informe
 
     -La clase Cadete debería tener los métodos:
-- Agregar Pedido
+- Buscar el Pedido.
+- Entregar el Pedido.
+- Cantidad de pedidos Completados.
+- Calcular Jornal.
 
 #### *Teniendo en cuenta los principios de abstracción y ocultamiento, que atributos,propiedades y métodos deberían ser públicos y cuáles privados.*
-
+ Según los principios de abstracción y ocultamiento, deberían ser privados todos los atributos debido a que son detalles internos del objeto y no son de utilidad en interacciones con 
 
 #### *¿Cómo diseñaría los constructores de cada una de las clases?*
 
