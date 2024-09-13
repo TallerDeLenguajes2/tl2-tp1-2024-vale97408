@@ -121,26 +121,77 @@ public class Cadeteria
     {
         Console.WriteLine("------ INFORME FINAL DE JORNADA -------");
 
-        float  montoGanado;
-        int cantEnviosCadete, cantTotalEnvios=0;
-        float envioPromedio; 
-        
+        float montoGanado;
+        int cantEnviosCadete, cantTotalEnvios = 0;
+        float envioPromedio;
+
         foreach (var cadete in listadoCadetes)
         {
-            cantEnviosCadete= cadete.enviosCompletos();
-            montoGanado= cadete.JornalACobrar();
+            cantEnviosCadete = cadete.enviosCompletos();
+            montoGanado = cadete.JornalACobrar();
             Console.WriteLine($"-Nombre Cadete: {cadete.Nombre} |- Cantidad de pedidos entregados: {cantEnviosCadete} |- Monto ganado: ${montoGanado}");
 
             cantTotalEnvios = cantTotalEnvios + cantEnviosCadete;
         }
 
-         envioPromedio = cantTotalEnvios/(float)listadoCadetes.Count;
+        envioPromedio = cantTotalEnvios / (float)listadoCadetes.Count;
 
         Console.WriteLine("\n--- EN GENERAL:");
         Console.WriteLine($"Cantidad total de envios: {cantTotalEnvios}");
         Console.WriteLine($"Promedio de envios por cadete: {envioPromedio}");
 
     }
+
+    public Pedido DarDeAltaPedidos(int nroPedido)
+    {
+        // Creo el pedido y lo cargo como pedido en estado pendiente 
+        string observacionPedido, nombreCliente, direccionCliente, telefonoCliente, referenciaDireccion;
+
+        // Solicitar datos del pedido y cliente
+        do
+        {
+            Console.WriteLine("=== Dar de Alta Pedido ===");
+
+            Console.Write("Observación del pedido: ");
+            observacionPedido = Console.ReadLine();
+
+            Console.Write(" ------------Datos del cliente----------- ");
+            Console.Write("Nombre: ");
+            nombreCliente = Console.ReadLine();
+
+            Console.Write("Teléfono del cliente: ");
+            telefonoCliente = Console.ReadLine();
+
+           
+            Console.Write("Dirección del cliente: ");
+            direccionCliente = Console.ReadLine();
+
+
+            Console.Write("Ingrese una referencia de la dirección (opcional): ");
+            referenciaDireccion = Console.ReadLine();
+
+            // Validación de los campos obligatorios
+            if (string.IsNullOrWhiteSpace(observacionPedido) || string.IsNullOrWhiteSpace(nombreCliente) ||
+                string.IsNullOrWhiteSpace(direccionCliente) || string.IsNullOrWhiteSpace(telefonoCliente))
+            {
+                Console.WriteLine("Debe completar todos los campos obligatorios.");
+            }
+
+        } while (string.IsNullOrWhiteSpace(observacionPedido) || string.IsNullOrWhiteSpace(nombreCliente) ||
+                 string.IsNullOrWhiteSpace(direccionCliente) || string.IsNullOrWhiteSpace(telefonoCliente));
+
+        // Crear un nuevo pedido con los datos ingresados
+        Pedido nuevoPedido = new Pedido(nroPedido, observacionPedido, Estado.EnPreparacion, nombreCliente, direccionCliente, telefonoCliente, referenciaDireccion);
+
+        // Mostrar la confirmación de creación
+        Console.WriteLine("Pedido creado exitosamente:");
+        Pedido.VerDatosPedido(nuevoPedido);
+
+        return nuevoPedido; // Devuelve el pedido creado 
+
+    }
+
+
 
 
 }

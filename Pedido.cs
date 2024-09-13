@@ -47,5 +47,12 @@ public class Pedido
         Console.WriteLine($"--Telefono: {cliente.Telefono} ");
          VerDireccionCliente(); 
     }
+
+    public static void VerDatosPedido(Pedido pedido)
+    {
+        
+
+    }
+
 }
 
