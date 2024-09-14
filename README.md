@@ -8,7 +8,8 @@ Por otro lado, entre las relaciones realizadas por *agregación* tenemos la de P
 
 
 #### *¿Qué métodos considera que debería tener la clase Cadetería y la clase Cadete?*
-    La clase Cadeteria deberia tener los métodos: 
+     -La clase Cadeteria deberia tener los métodos: 
+
 - `DarDeALtaPedidos`
 - `Asignar Pedido`
 - `ReasignarPedidos`
@@ -16,6 +17,7 @@ Por otro lado, entre las relaciones realizadas por *agregación* tenemos la de P
 - `InformeFinalJornada`
 
     -La clase Cadete debería tener los métodos:
+    
 - `EnviosCompletos`
 - `CantidadPedidosCompletados`
 - `JornalACobrar`
