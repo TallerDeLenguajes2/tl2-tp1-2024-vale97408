@@ -60,16 +60,16 @@ if (metodoCSV.Existe(nombreArchivoCadetes) && metodoCSV.Existe(nombreArchivoCade
 
                 break;
             case 2:
-                cadeteria.asignarPedidos(pedidosPendientes);
+                cadeteria.AsignarPedidos(pedidosPendientes);
                 break;
             case 3:
                 cadeteria.ModificarEstadoPedido();
                 break;
             case 4:
-                cadeteria.reasignarPedidos();
+                cadeteria.ReasignarPedidos();
                 break;
             case 5:
-                cadeteria.informeFinalJornada();
+                cadeteria.InformeFinalJornada();
                 break;
             case 0:
                 Console.WriteLine("Saliendo del sistema...");

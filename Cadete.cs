@@ -25,70 +25,19 @@ public class Cadete
 
     public int JornalACobrar()
     {
-        int cantidadCobrar = 500 * cantidadPedidosCompletados();
+        int cantidadCobrar = 500 * CantidadPedidosCompletados();
         return cantidadCobrar;
     }
 
 
-    public int cantidadPedidosCompletados()
+    public int CantidadPedidosCompletados()
     {
         // Recorro la lista de pedidos con Linq
         return listadoPedidos.Count(pedido => pedido.Estado == Estado.Entregado);
 
     }
 
-    public void buscaPedido(int nroPedido)
-    {
-        Pedido pedidoEncontrado = null;
-
-        foreach (var pedido in listadoPedidos)
-        {
-            if (pedido.NroPedido == nroPedido)
-            {
-                pedidoEncontrado = pedido; // Guarda el pedido encontrado
-                break; // Sale del bucle una vez que se encuentra el pedido
-            }
-        }
-
-        if (pedidoEncontrado != null)
-        {
-            pedidoEncontrado.Estado = Estado.EnCamino; // Cambia el estado 
-            Console.WriteLine($"--El pedido NRO  [{nroPedido}] ahora está en camino.");
-        }
-        else
-        {
-            Console.WriteLine($"No se encontró el pedido con el número {nroPedido}.");
-        }
-
-    }
-
-    public void entregaPedido(int nroPedido)
-    {
-
-        Pedido pedidoEntregado = null;
-
-        foreach (var pedido in listadoPedidos)
-        {
-            if (pedido.NroPedido == nroPedido)
-            {
-                pedidoEntregado = pedido; // Guarda el pedido encontrado
-                break; // Sale del bucle una vez que se encuentra el pedido
-            }
-        }
-
-        if (pedidoEntregado != null)
-        {
-            pedidoEntregado.Estado = Estado.EnCamino; // Cambia el estado 
-            Console.WriteLine($"--El pedido NRO [{nroPedido}] ahora fue entregado con éxito.");
-        }
-        else
-        {
-            Console.WriteLine($"No se entrego el pedido con el número {nroPedido}.");
-        }
-
-    }
-
-    public int enviosCompletos()
+    public int EnviosCompletos()
     {
         return ListadoPedidos.Count(p => p.Estado == Estado.Entregado);
     }

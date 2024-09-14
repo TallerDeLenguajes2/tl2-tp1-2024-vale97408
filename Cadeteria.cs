@@ -22,7 +22,7 @@ public class Cadeteria
 
     // -----------METODOS 
 
-    public void asignarPedidos(List<Pedido> pedidosPendientes)
+    public void AsignarPedidos(List<Pedido> pedidosPendientes)
     {
         // Verificar si hay pedidos pendientes
         if (pedidosPendientes == null || pedidosPendientes.Count == 0)
@@ -101,7 +101,7 @@ public class Cadeteria
         Console.WriteLine($"Pedido {pedidoAsignado.NroPedido} asignado al cadete {cadeteSeleccionado.Nombre}.");
     }
 
-    public void reasignarPedidos()
+    public void ReasignarPedidos()
     {
 
         Pedido pedidoAReasignar = null;
@@ -191,7 +191,7 @@ public class Cadeteria
         Console.WriteLine($"Pedido {nroPedido} reasignado a {listadoCadetes[seleccion - 1].Nombre}.");
     }
 
-    public void informeFinalJornada()
+    public void InformeFinalJornada()
     {
         Console.WriteLine("------ INFORME FINAL DE JORNADA -------");
 
@@ -201,7 +201,7 @@ public class Cadeteria
 
         foreach (var cadete in listadoCadetes)
         {
-            cantEnviosCadete = cadete.enviosCompletos();
+            cantEnviosCadete = cadete.EnviosCompletos();
             montoGanado = cadete.JornalACobrar();
             Console.WriteLine($"-Nombre Cadete: {cadete.Nombre} |- Cantidad de pedidos entregados: {cantEnviosCadete} |- Monto ganado: ${montoGanado}");
 

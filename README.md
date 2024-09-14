@@ -8,24 +8,29 @@ Por otro lado, entre las relaciones realizadas por *agregación* tenemos la de P
 
 
 #### *¿Qué métodos considera que debería tener la clase Cadetería y la clase Cadete?*
-    La clase Cadetería deberia tener los métodos: 
-- Asignar Pedido
-- Reasignar Pedidos
-- Informe
+    La clase Cadeteria deberia tener los métodos: 
+- `DarDeALtaPedidos`
+- `Asignar Pedido`
+- `ReasignarPedidos`
+- `ModificarEstadoPedido`
+- `InformeFinalJornada`
 
     -La clase Cadete debería tener los métodos:
-- Buscar el Pedido.
-- Entregar el Pedido.
-- Cantidad de pedidos Completados.
-- Calcular Jornal.
+- `EnviosCompletos`
+- `CantidadPedidosCompletados`
+- `JornalACobrar`
 
 #### *Teniendo en cuenta los principios de abstracción y ocultamiento, que atributos,propiedades y métodos deberían ser públicos y cuáles privados.*
- Según los principios de abstracción y ocultamiento, deberían ser privados todos los atributos debido a que son detalles internos del objeto y no son de utilidad en interacciones con 
+ Según los principios de abstracción y ocultamiento, deberían ser privados todos los **atributos** debido a que son detalles internos del objeto a los que no deben ser accedidos o modificados directamente. Respecto a las **propiedades y métodos**, todos son públicos debido a que este sistema de gestión  consta de una interfaz controlada para interactuar con los datos del objeto. No tuve ningún caso para realizarlo privado.
 
 #### *¿Cómo diseñaría los constructores de cada una de las clases?*
-
+ - `Cadete`: Obtiene la información del ID, Nombre, Dirección, Teléfono y su Lista de Pedidos vacía.
+  - `Cadeteria`: Contiene la información del Nombre, Teléfono y su Lista de Cadetes cargada con antelación.
+  - `Pedido`: Consta del NroPedido, Observación del Pedido, Estado y los datos para construir el cliente como ser  Nombre, Dirección, Teléfono, y Datos de referencia de la dirección(Opcional).
+  - `Cliente`: Incluye los datos del  Nombre, Dirección, Teléfono, y Datos de referencia de la dirección del cliente (Opcional).
 
 #### *¿Se le ocurre otra forma que podría haberse realizado el diseño de clases?*
 
+Otra forma de realizar el diseño de clases con los temas vistos hasta este práctico sería agregar una clase específica para el Estado de los pedidos (Así lo implementé y fue útil). También, podría modificar la relación entre Cliente y Pedido de composición a agregación, ya que esto permitiría mantener los pedidos en el sistema incluso si el cliente es eliminado, con el fin de conservar un historial de ventas sin depender de la existencia del cliente. 
 
 
