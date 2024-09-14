@@ -24,10 +24,16 @@ if (metodoCSV.Existe(nombreArchivoCadetes) && metodoCSV.Existe(nombreArchivoCade
 
     // Mostrar el menú y manejar las opciones
     int opcion;  // No se si esta bien esto
+    List <Pedido> pedidosPendientes = new List<Pedido>();
+    int nroPedido = 0;
+
     do
     {
         Console.Clear();
+        Console.WriteLine($"====CADETERIA : {cadeteria.Nombre}=====");
+
         Console.WriteLine("======= SISTEMA DE GESTIÓN DE PEDIDOS =======");
+
         Console.WriteLine("1. Dar de alta pedidos");
         Console.WriteLine("2. Asignar pedidos a cadetes");
         Console.WriteLine("3. Cambiar estado de un pedido");
@@ -41,26 +47,26 @@ if (metodoCSV.Existe(nombreArchivoCadetes) && metodoCSV.Existe(nombreArchivoCade
             Console.WriteLine("Por favor, ingrese un número válido.");
             continue;
         }
-        
-        int nroPedido=0;
-        Pedido pedidoNuevo = null; 
-        Pedido pedidoNoAsignado = null; 
-        
+
+        Pedido pedidoNuevo = null;
        
         switch (opcion)
         {
             case 1:
-                cadeteria.DarDeAltaPedidos(nroPedido);
+                 nroPedido++;
+                pedidoNuevo=cadeteria.DarDeAltaPedidos(nroPedido);
+                pedidosPendientes.Add(pedidoNuevo);
+
 
                 break;
             case 2:
-                cadeteria.asignarPedidos(pedidoNuevo);
+                cadeteria.asignarPedidos(pedidosPendientes);
                 break;
             case 3:
-                //CambiarEstadoDePedido(cadeteria);
+                cadeteria.ModificarEstadoPedido();
                 break;
             case 4:
-                cadeteria.reasignarPedidos(nroPedido);
+                cadeteria.reasignarPedidos();
                 break;
             case 5:
                 cadeteria.informeFinalJornada();
