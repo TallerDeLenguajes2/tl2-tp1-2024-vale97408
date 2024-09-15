@@ -24,7 +24,7 @@ if (metodoCSV.Existe(nombreArchivoCadetes) && metodoCSV.Existe(nombreArchivoCade
 
     // Mostrar el menú y manejar las opciones
     int opcion;  // No se si esta bien esto
-    List<Pedido> pedidosPendientes = new List<Pedido>();
+    //List<Pedido> pedidosPendientes = new List<Pedido>();
     int nroPedido = 0;
 
     do
@@ -56,12 +56,13 @@ if (metodoCSV.Existe(nombreArchivoCadetes) && metodoCSV.Existe(nombreArchivoCade
             case 1:
                 nroPedido++;
                 pedidoNuevo = cadeteria.DarDeAltaPedidos(nroPedido);
-                pedidosPendientes.Add(pedidoNuevo);
 
-
+               // pedidosPendientes.Add(pedidoNuevo);
+              // cadeteria.ListadoPedidos.Add(pedidoNuevo);
+                
                 break;
             case 2:
-                cadeteria.AsignarPedidos(pedidosPendientes);
+                cadeteria.AsignarPedidos();
                 break;
             case 3:
                 cadeteria.ModificarEstadoPedido();
