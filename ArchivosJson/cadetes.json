@@ -1,0 +1,32 @@
+[
+    {
+      "Id": 1,
+      "Nombre": "José Albornoz",
+      "Direccion": "Calle Mendoza 123",
+      "Telefono": "3815123456"
+    },
+    {
+      "Id": 2,
+      "Nombre": "María Benítez",
+      "Direccion": "Avenida Mitre 987",
+      "Telefono": "3815234567"
+    },
+    {
+      "Id": 3,
+      "Nombre": "Diego Cortez",
+      "Direccion": "La Bombilla",
+      "Telefono": "3815345678"
+    },
+    {
+      "Id": 4,
+      "Nombre": "Rocío Herrera",
+      "Direccion": "Pasaje Colón 789",
+      "Telefono": "3815456789"
+    },
+    {
+      "Id": 5,
+      "Nombre": "Santiago Salazar",
+      "Direccion": "Boulevard Roca 101",
+      "Telefono": "3815567890"
+    }
+  ]

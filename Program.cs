@@ -5,7 +5,6 @@
 string nombreArchivoCadetes = "cadetes.csv";
 string nombreArchivoCadeteria = "cadeteria.csv";
 
-// Instancio la clase 
 manejoAchivos metodoCSV = new manejoAchivos();
 
 // Controlo que los archivos existan. 
