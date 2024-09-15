@@ -6,19 +6,19 @@ public class Cadeteria
 
     private List<Pedido> listadoPedidos; // TP2
 
-
-    public Cadeteria(string nombre, string telefono, List<Cadete> listadoCadetes)
+// Saque el listado de cadetes
+    public Cadeteria(string nombre, string telefono)
     {
         this.nombre = nombre;
         this.telefono = telefono;
-        this.listadoCadetes = listadoCadetes;
+        //this.listadoCadetes = listadoCadetes;
         ListadoPedidos = new List<Pedido>(); // Inicializo
     }
 
     // No quiero que se admita modificación 
     public string Nombre { get => nombre; }
     public string Telefono { get => telefono; }
-    public List<Cadete> ListadoCadetes { get => listadoCadetes; }
+    public List<Cadete> ListadoCadetes { get => listadoCadetes; set => listadoCadetes = value;}
     public List<Pedido> ListadoPedidos { get => listadoPedidos; set => listadoPedidos = value; }
 
 
