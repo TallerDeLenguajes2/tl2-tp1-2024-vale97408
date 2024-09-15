@@ -236,6 +236,12 @@ public class Cadeteria
 
         Pedido pedidoEncontrado = ListadoPedidos.FirstOrDefault(p => p.NroPedido == nroPedido);
 
+        if (pedidoEncontrado == null)
+        {
+            Console.WriteLine($"No se encontró ningún pedido con el número {nroPedido}.");
+            return;
+        }
+
         if (pedidoEncontrado.Estado == Estado.EnPreparacion)
         {
             Console.WriteLine($"El pedido Nro: {pedidoEncontrado.NroPedido} está en 'En Preparación' , no fue asignado a un cadete y no se puede modificar.");
@@ -280,7 +286,7 @@ public class Cadeteria
         }
     }
 
-    public Pedido DarDeAltaPedidos(int nroPedido)
+    public void DarDeAltaPedidos(int nroPedido)
     {
 
         string observacionPedido, nombreCliente, direccionCliente, telefonoCliente, referenciaDireccion;
@@ -331,7 +337,6 @@ public class Cadeteria
 
         ListadoPedidos.Add(nuevoPedido); // Tp2
 
-        return nuevoPedido;
     }
 
 
@@ -361,7 +366,17 @@ public class Cadeteria
 
     public int EnviosCompletos(int id)
     {
-        return ListadoPedidos.Count(p => p.CadeteAsignado.Id == id && p.Estado == Estado.Entregado);
+        // Control para pedidos sin cadete 
+        int totalEnvios = 0;
+        foreach (var pedido in ListadoPedidos)
+        {
+            if (pedido.CadeteAsignado != null && pedido.CadeteAsignado.Id == id && pedido.Estado == Estado.Entregado)
+            {
+                totalEnvios++;
+            }
+        }
+        return totalEnvios;
+        // return ListadoPedidos.Count(p => p.CadeteAsignado.Id == id && p.Estado == Estado.Entregado);
     }
 
     public void MostrarListadoPedidos()

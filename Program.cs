@@ -22,9 +22,7 @@ if (metodoCSV.Existe(nombreArchivoCadetes) && metodoCSV.Existe(nombreArchivoCade
 
     // ----------MENU
 
-    // Mostrar el menú y manejar las opciones
     int opcion;  // No se si esta bien esto
-    //List<Pedido> pedidosPendientes = new List<Pedido>();
     int nroPedido = 0;
 
     do
@@ -48,18 +46,13 @@ if (metodoCSV.Existe(nombreArchivoCadetes) && metodoCSV.Existe(nombreArchivoCade
             Console.WriteLine("Por favor, ingrese un número válido.");
             continue;
         }
-
-        Pedido pedidoNuevo = null;
-
+        // Pedido pedidoNuevo = null;
         switch (opcion)
         {
             case 1:
                 nroPedido++;
-                pedidoNuevo = cadeteria.DarDeAltaPedidos(nroPedido);
-
-               // pedidosPendientes.Add(pedidoNuevo);
-              // cadeteria.ListadoPedidos.Add(pedidoNuevo);
-                
+                cadeteria.DarDeAltaPedidos(nroPedido);
+                //pedidoNuevo = cadeteria.DarDeAltaPedidos(nroPedido);
                 break;
             case 2:
                 cadeteria.AsignarPedidos();
