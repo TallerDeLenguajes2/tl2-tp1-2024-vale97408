@@ -91,19 +91,10 @@ public class Cadeteria
         } while (!pedidoValido);
 
         Pedido pedidoAsignado = pedidosPendientes[seleccionPedido - 1];
-        // Asigno el pedido al cadete 
-
-
-        // pedidoAsignado.CadeteAsignado = cadeteSeleccionado;
-        // ListadoPedidos.Add(pedidoAsignado);
-        // pedidosPendientes.Remove(pedidoAsignado); // Eliminar de la lista de pendientes
-        // // Cambio estado de pedido a en camino cuando ya es asignado
-        // pedidoAsignado.Estado = Estado.EnCamino;
-
+       
         AsignarCadeteAPedido(cadeteSeleccionado.Id, pedidoAsignado.NroPedido);
         pedidosPendientes.Remove(pedidoAsignado); // Eliminar de la lista de pendientes
 
-        // Console.WriteLine($"===Pedido {pedidoAsignado.NroPedido} asignado al cadete {cadeteSeleccionado.Nombre}.===");
     }
 
     public void ReasignarPedidos()
@@ -135,11 +126,15 @@ public class Cadeteria
 
         if (pedidoAReasignar != null)
         {
-
-            // Si fue 'Entregado' no lo reasgina
             if (pedidoAReasignar.Estado == Estado.Entregado)
             {
                 Console.WriteLine($"El pedido Nro: {nroPedido} ya fue entregado y no puede ser reasignado.");
+                return;
+            }
+
+            if (pedidoAReasignar.Estado == Estado.EnPreparacion)
+            {
+                Console.WriteLine($"El pedido Nro: {nroPedido} esta 'En Preparacion' no puede ser reasignado.");
                 return;
             }
 
@@ -390,9 +385,18 @@ public class Cadeteria
         Console.WriteLine("------ LISTADO DE PEDIDOS ------");
         foreach (var pedido in ListadoPedidos)
         {
-            Console.WriteLine($"Número de Pedido: {pedido.NroPedido} | Estado: {pedido.Estado} ");
+            string infoPedido = $"Número de Pedido: {pedido.NroPedido} | Estado: {pedido.Estado} ";
+            if (pedido.Estado != Estado.EnPreparacion)
+            {
+
+                infoPedido += $"| Cadete: {pedido.CadeteAsignado.Nombre}";
+
+            }
+            else
+            {
+                infoPedido += "| Cadete: No Asignado";
+            }
+            Console.WriteLine(infoPedido);
         }
     }
-
-
 }
