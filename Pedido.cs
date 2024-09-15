@@ -12,6 +12,10 @@ public class Pedido
     private Cliente cliente;
     private Estado estado;
 
+    private Cadete cadeteAsignado; // Referencia a Cadete (TP2)
+
+
+
     public Pedido(int nroPedido, string obs, Estado estado, string nombre, string direccion, string telefono, string datosreferenciaDireccion)
     {
         this.nroPedido = nroPedido;
@@ -26,6 +30,7 @@ public class Pedido
     public int NroPedido { get => nroPedido; }
     public string Obs { get => obs; }
     public Estado Estado { get => estado; set => estado = value; }
+    public Cadete CadeteAsignado { get => cadeteAsignado; set => cadeteAsignado = value; }
 
     public void VerDireccionCliente()
     {

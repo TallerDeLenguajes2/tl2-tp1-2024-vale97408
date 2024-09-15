@@ -24,7 +24,7 @@ if (metodoCSV.Existe(nombreArchivoCadetes) && metodoCSV.Existe(nombreArchivoCade
 
     // Mostrar el menú y manejar las opciones
     int opcion;  // No se si esta bien esto
-    List <Pedido> pedidosPendientes = new List<Pedido>();
+    List<Pedido> pedidosPendientes = new List<Pedido>();
     int nroPedido = 0;
 
     do
@@ -39,6 +39,7 @@ if (metodoCSV.Existe(nombreArchivoCadetes) && metodoCSV.Existe(nombreArchivoCade
         Console.WriteLine("3. Cambiar estado de un pedido");
         Console.WriteLine("4. Reasignar pedido a otro cadete");
         Console.WriteLine("5. Mostrar informe de pedidos");
+        Console.WriteLine("6. Listado de Pedidos");
         Console.WriteLine("0. Salir");
         Console.Write("Seleccione una opción: ");
 
@@ -49,12 +50,12 @@ if (metodoCSV.Existe(nombreArchivoCadetes) && metodoCSV.Existe(nombreArchivoCade
         }
 
         Pedido pedidoNuevo = null;
-       
+
         switch (opcion)
         {
             case 1:
-                 nroPedido++;
-                pedidoNuevo=cadeteria.DarDeAltaPedidos(nroPedido);
+                nroPedido++;
+                pedidoNuevo = cadeteria.DarDeAltaPedidos(nroPedido);
                 pedidosPendientes.Add(pedidoNuevo);
 
 
@@ -71,6 +72,10 @@ if (metodoCSV.Existe(nombreArchivoCadetes) && metodoCSV.Existe(nombreArchivoCade
             case 5:
                 cadeteria.InformeFinalJornada();
                 break;
+            case 6:
+                cadeteria.MostrarListadoPedidos();
+                break;
+
             case 0:
                 Console.WriteLine("Saliendo del sistema...");
                 break;

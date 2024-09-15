@@ -5,7 +5,8 @@ public class Cadete
     private string nombre;
     private string direccion;
     private string telefono;
-    private List<Pedido> listadoPedidos;
+
+    //private List<Pedido> listadoPedidos; (TP2)
 
     public Cadete(int id, string nombre, string direccion, string telefono)
     {
@@ -14,20 +15,27 @@ public class Cadete
         this.direccion = direccion;
         this.telefono = telefono;
         //this.ListadoPedidos = listadoPedidos;
-        listadoPedidos = new List<Pedido>();
+        //listadoPedidos = new List<Pedido>();
+    }
+
+    public Cadete () // Para la deserialización
+    {
+
     }
 
     public int Id { get => id; }
     public string Nombre { get => nombre; }
     public string Direccion { get => direccion; }
     public string Telefono { get => telefono; }
-    public List<Pedido> ListadoPedidos { get => listadoPedidos; set => listadoPedidos = value; } // Si necesito modificar la lista de pedidos y sus datos 
+    //public List<Pedido> ListadoPedidos { get => listadoPedidos; set => listadoPedidos = value; } // Si necesito modificar la lista de pedidos y sus datos 
 
+
+   /*
     public int JornalACobrar()
     {
         int cantidadCobrar = 500 * CantidadPedidosCompletados();
         return cantidadCobrar;
-    }
+    } 
 
 
     public int CantidadPedidosCompletados()
@@ -40,6 +48,6 @@ public class Cadete
     public int EnviosCompletos()
     {
         return ListadoPedidos.Count(p => p.Estado == Estado.Entregado);
-    }
+    }*/
 
 }

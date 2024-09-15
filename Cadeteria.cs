@@ -1,10 +1,10 @@
-using System.Runtime;
-
 public class Cadeteria
 {
     private string nombre;
     private string telefono;
     private List<Cadete> listadoCadetes;
+
+    private List<Pedido> listadoPedidos; // TP2
 
 
     public Cadeteria(string nombre, string telefono, List<Cadete> listadoCadetes)
@@ -12,12 +12,14 @@ public class Cadeteria
         this.nombre = nombre;
         this.telefono = telefono;
         this.listadoCadetes = listadoCadetes;
+        ListadoPedidos = new List<Pedido>(); // Inicializo
     }
 
     // No quiero que se admita modificación 
     public string Nombre { get => nombre; }
     public string Telefono { get => telefono; }
     public List<Cadete> ListadoCadetes { get => listadoCadetes; }
+    public List<Pedido> ListadoPedidos { get => listadoPedidos; set => listadoPedidos = value; }
 
 
     // -----------METODOS 
@@ -37,7 +39,7 @@ public class Cadeteria
         // Mostrar listado de cadetes disponibles
         for (int i = 0; i < listadoCadetes.Count; i++)
         {
-            Console.WriteLine($"{i + 1}. {listadoCadetes[i].Nombre} (Pedidos asignados: {listadoCadetes[i].ListadoPedidos.Count})");
+            Console.WriteLine($"{i + 1}. {listadoCadetes[i].Nombre} )");
         }
 
         int seleccion = 0;
@@ -57,21 +59,16 @@ public class Cadeteria
 
         } while (!seleccionValida);
 
-        // Verificar si el cadete tiene capacidad para recibir más pedidos
+        // Verifica si el cadete tiene capacidad para recibir más pedidos
         Cadete cadeteSeleccionado = listadoCadetes[seleccion - 1];
-        int maxPedidosPorCadete = 5; // Puedes definir un límite de pedidos por cadete
-
-        if (cadeteSeleccionado.ListadoPedidos.Count >= maxPedidosPorCadete)
-        {
-            Console.WriteLine($"El cadete {cadeteSeleccionado.Nombre} ya tiene el máximo de {maxPedidosPorCadete} pedidos asignados.");
-            return;
-        }
+        //int maxPedidosPorCadete = 5; 
 
         // Seleccionar el pedido pendiente para asignar
-        Console.WriteLine("Pedidos pendientes:");
+        Console.WriteLine("--------------PEDIDOS PENDIENTES--------:");
+
         for (int i = 0; i < pedidosPendientes.Count; i++)
         {
-            Console.WriteLine($"{i + 1}. Pedido Nro: {pedidosPendientes[i].NroPedido}");
+            Console.WriteLine($"{i + 1}) Pedido Nro: {pedidosPendientes[i].NroPedido}");
         }
 
         int seleccionPedido = 0;
@@ -91,14 +88,20 @@ public class Cadeteria
 
         } while (!pedidoValido);
 
-        // Asigno el pedido al cadete 
         Pedido pedidoAsignado = pedidosPendientes[seleccionPedido - 1];
-        cadeteSeleccionado.ListadoPedidos.Add(pedidoAsignado);
-        pedidosPendientes.Remove(pedidoAsignado); // Eliminar de la lista de pendientes
-        // Cambio estado de pedido a en camino cuando ya es asignado
-        pedidoAsignado.Estado = Estado.EnCamino;
+        // Asigno el pedido al cadete 
 
-        Console.WriteLine($"Pedido {pedidoAsignado.NroPedido} asignado al cadete {cadeteSeleccionado.Nombre}.");
+
+        // pedidoAsignado.CadeteAsignado = cadeteSeleccionado;
+        // ListadoPedidos.Add(pedidoAsignado);
+        // pedidosPendientes.Remove(pedidoAsignado); // Eliminar de la lista de pendientes
+        // // Cambio estado de pedido a en camino cuando ya es asignado
+        // pedidoAsignado.Estado = Estado.EnCamino;
+
+        AsignarCadeteAPedido(cadeteSeleccionado.Id, pedidoAsignado.NroPedido);
+        pedidosPendientes.Remove(pedidoAsignado); // Eliminar de la lista de pendientes
+
+        // Console.WriteLine($"===Pedido {pedidoAsignado.NroPedido} asignado al cadete {cadeteSeleccionado.Nombre}.===");
     }
 
     public void ReasignarPedidos()
@@ -108,7 +111,7 @@ public class Cadeteria
         Cadete cadeteOriginal = null;
         int nroPedido;
 
-        bool hayPedidos = listadoCadetes.Any(c => c.ListadoPedidos.Any(p => p.Estado != Estado.Entregado)); // Siempre que haya pedidos y no hayan sido entregados aun
+        bool hayPedidos = ListadoPedidos.Any(p => p.Estado != Estado.Entregado && p.Estado!= Estado.EnPreparacion); // Siempre que haya pedidos que no hayan sido entregados aun, y hayan sido asignados
 
 
         if (!hayPedidos)
@@ -125,26 +128,20 @@ public class Cadeteria
             return;
         }
 
+        // Uso de funcion LINQ para encontrar el pedido a reasignar
+        pedidoAReasignar = ListadoPedidos.FirstOrDefault(p => p.NroPedido == nroPedido);
 
-        // Buscar el pedido que quiero reasignar en la lista de todos los cadetes
-        foreach (var cadete in listadoCadetes)
+        if (pedidoAReasignar != null)
         {
-            // Uso de funcion LINQ para encontrar al cadete que tenga el pedido a reasignar
-            pedidoAReasignar = cadete.ListadoPedidos.FirstOrDefault(p => p.NroPedido == nroPedido);
 
-            if (pedidoAReasignar != null)
+            // Si fue 'Entregado' no lo reasgina
+            if (pedidoAReasignar.Estado == Estado.Entregado)
             {
-
-                // Si fue 'Entregado' no lo reasgina
-                if (pedidoAReasignar.Estado == Estado.Entregado)
-                {
-                    Console.WriteLine($"El pedido Nro: {nroPedido} ya fue entregado y no puede ser reasignado.");
-                    return;
-                }
-
-                cadeteOriginal = cadete; // reasigno
-                break;
+                Console.WriteLine($"El pedido Nro: {nroPedido} ya fue entregado y no puede ser reasignado.");
+                return;
             }
+
+            cadeteOriginal = pedidoAReasignar.CadeteAsignado; // reasigno            
         }
 
         if (pedidoAReasignar == null)
@@ -154,9 +151,8 @@ public class Cadeteria
         }
 
         // Elimino el pedido de la lista del cadete original
-        cadeteOriginal.ListadoPedidos.Remove(pedidoAReasignar);
+        // cadeteOriginal.ListadoPedidos.Remove(pedidoAReasignar);
 
-        // Mostrar la lista de cadetes para seleccionar uno nuevo
         Console.WriteLine("Seleccione el nuevo cadete al que reasignará el pedido:");
         for (int i = 0; i < listadoCadetes.Count; i++)
         {
@@ -185,8 +181,10 @@ public class Cadeteria
 
         } while (!seleccionValida);
 
-        // Asignar el pedido al nuevo cadete
-        listadoCadetes[seleccion - 1].ListadoPedidos.Add(pedidoAReasignar); // Guardo en la lista
+        // Asigno el pedido al nuevo cadete
+        pedidoAReasignar.CadeteAsignado = listadoCadetes[seleccion - 1];
+
+        //listadoCadetes[seleccion - 1].ListadoPedidos.Add(pedidoAReasignar); // Ya no  Guardo en la lista
 
         Console.WriteLine($"Pedido {nroPedido} reasignado a {listadoCadetes[seleccion - 1].Nombre}.");
     }
@@ -201,8 +199,8 @@ public class Cadeteria
 
         foreach (var cadete in listadoCadetes)
         {
-            cantEnviosCadete = cadete.EnviosCompletos();
-            montoGanado = cadete.JornalACobrar();
+            cantEnviosCadete = EnviosCompletos(cadete.Id);
+            montoGanado = JornalACobrar(cadete.Id);
             Console.WriteLine($"-Nombre Cadete: {cadete.Nombre} |- Cantidad de pedidos entregados: {cantEnviosCadete} |- Monto ganado: ${montoGanado}");
 
             cantTotalEnvios = cantTotalEnvios + cantEnviosCadete;
@@ -218,13 +216,13 @@ public class Cadeteria
 
     public void ModificarEstadoPedido()
     {
-        bool hayPedidos = listadoCadetes.Any(c => c.ListadoPedidos.Any());
-        if (!hayPedidos)
+        // No puedo modificar el estado de un pedido entregado y en preparacion
+        
+        if (ListadoPedidos.Count == 0 || ListadoPedidos == null)
         {
             Console.WriteLine("No hay pedidos en el sistema para modificar.");
             return;
         }
-
 
         Console.WriteLine("Ingrese el número del pedido a modificar: ");
         int nroPedido;
@@ -234,66 +232,50 @@ public class Cadeteria
             return;
         }
 
-        // Localizo al cadete con el nro del pedido, sino devuelve null
-        Cadete cadeteConPedido = listadoCadetes.FirstOrDefault(c => c.ListadoPedidos.Any(p => p.NroPedido == nroPedido));
+        Pedido pedidoEncontrado = ListadoPedidos.FirstOrDefault(p => p.NroPedido == nroPedido);
 
-        if (cadeteConPedido != null)
+        if (pedidoEncontrado != null)
         {
-            Pedido pedidoEncontrado = cadeteConPedido.ListadoPedidos.FirstOrDefault(p => p.NroPedido == nroPedido);
 
-            if (pedidoEncontrado != null)
+            Console.WriteLine($"Pedido Nro: {pedidoEncontrado.NroPedido} - Estado Actual: {pedidoEncontrado.Estado}");
+
+            Console.WriteLine("Seleccione el nuevo estado del pedido:");
+            //Console.WriteLine("1. En Preparación");
+            Console.WriteLine("1. En Camino");
+            Console.WriteLine("2. Entregado");
+
+            int opcionEstado;
+            if (int.TryParse(Console.ReadLine(), out opcionEstado))
             {
-
-                Console.WriteLine($"Pedido Nro: {pedidoEncontrado.NroPedido} - Estado Actual: {pedidoEncontrado.Estado}");
-
-                Console.WriteLine("Seleccione el nuevo estado del pedido:");
-                //Console.WriteLine("1. En Preparación");
-                Console.WriteLine("1. En Camino");
-                Console.WriteLine("2. Entregado");
-
-                int opcionEstado;
-                if (int.TryParse(Console.ReadLine(), out opcionEstado))
+                switch (opcionEstado)
                 {
-                    switch (opcionEstado)
-                    {
-                        /*case 1:
-                            pedidoEncontrado.Estado = Estado.EnPreparacion;
-                            Console.WriteLine("El pedido ha sido actualizado a 'En Preparación'.");
-                            break;*/
-                        case 1:
-                            pedidoEncontrado.Estado = Estado.EnCamino;
-                            Console.WriteLine("El pedido ha sido actualizado a 'En Camino'.");
-                            break;
-                        case 2:
-                            pedidoEncontrado.Estado = Estado.Entregado;
-                            Console.WriteLine("El pedido ha sido actualizado a 'Entregado'.");
-                            break;
-                        default:
-                            Console.WriteLine("Opción no válida. El estado del pedido no ha cambiado.");
-                            break;
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Entrada no válida. El estado del pedido no ha cambiado.");
+                    /*case 1:
+                        pedidoEncontrado.Estado = Estado.EnPreparacion;
+                        Console.WriteLine("El pedido ha sido actualizado a 'En Preparación'.");
+                        break;*/
+                    case 1:
+                        pedidoEncontrado.Estado = Estado.EnCamino;
+                        Console.WriteLine("El pedido ha sido actualizado a 'En Camino'.");
+                        break;
+                    case 2:
+                        pedidoEncontrado.Estado = Estado.Entregado;
+                        Console.WriteLine("El pedido ha sido actualizado a 'Entregado'.");
+                        break;
+                    default:
+                        Console.WriteLine("Opción no válida. El estado del pedido no ha cambiado.");
+                        break;
                 }
             }
             else
             {
-                Console.WriteLine($"No se encontró ningún pedido con el número {nroPedido}.");
+                Console.WriteLine("Entrada no válida. El estado del pedido no ha cambiado.");
             }
         }
         else
         {
-            Console.WriteLine($"No se encontró ningún cadete con un pedido con el número {nroPedido}.");
+            Console.WriteLine($"No se encontró ningún pedido con el número {nroPedido}.");
         }
     }
-
-
-
-
-
-
 
     public Pedido DarDeAltaPedidos(int nroPedido)
     {
@@ -346,5 +328,53 @@ public class Cadeteria
 
         return nuevoPedido;
     }
+
+
+    // METODOS TP2
+
+    public int JornalACobrar(int idCadete)
+    {
+        int pedidosEntregados = EnviosCompletos(idCadete);
+        int cantidadCobrar = 500 * pedidosEntregados;
+        return cantidadCobrar;
+    }
+
+    public void AsignarCadeteAPedido(int idCadete, int idPedido)
+    {
+        Cadete cadeteSeleccionado = listadoCadetes.FirstOrDefault(c => c.Id == idCadete);
+        Pedido pedidoSeleccionado = listadoPedidos.FirstOrDefault(p => p.NroPedido == idPedido);
+
+        pedidoSeleccionado.CadeteAsignado = cadeteSeleccionado;
+        ListadoPedidos.Add(pedidoSeleccionado);
+
+        // Cambio estado de pedido a en camino cuando ya es asignado
+        pedidoSeleccionado.Estado = Estado.EnCamino;
+
+        Console.WriteLine($"===Pedido {pedidoSeleccionado.NroPedido} asignado al cadete {cadeteSeleccionado.Nombre}.===");
+
+    }
+
+    //---------------Extras-----------
+
+    public int EnviosCompletos(int id)
+    {
+        return ListadoPedidos.Count(p => p.CadeteAsignado.Id == id && p.Estado == Estado.Entregado);
+    }
+
+    public void MostrarListadoPedidos()
+    {
+        if (ListadoPedidos.Count == 0)
+        {
+            Console.WriteLine("No hay pedidos en el sistema.");
+            return;
+        }
+
+        Console.WriteLine("------ LISTADO DE PEDIDOS ------");
+        foreach (var pedido in ListadoPedidos)
+        {
+            Console.WriteLine($"Número de Pedido: {pedido.NroPedido} | Estado: {pedido.Estado} | Cadete: {pedido.CadeteAsignado.Nombre}");
+        }
+    }
+
 
 }
