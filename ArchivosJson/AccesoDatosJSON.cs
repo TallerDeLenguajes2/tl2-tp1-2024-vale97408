@@ -13,51 +13,64 @@ public class AccesoDatosJSON : AccesoADatos
     public List<Cadete> LeerCadetes(string nombreArchivo)
     {
         string ruta = Path.Combine(CarpetaJSON, nombreArchivo);
-        List<Cadete> cadetes = new List<Cadete>();
+        string json;
 
         if (!Existe(nombreArchivo))
         {
             Console.WriteLine($"El archivo {nombreArchivo} no existe.");
-            return cadetes; // Devuelve una lista vacía si el archivo no existe
+            return null;
         }
 
-         try
+        try
         {
-            // Lee todo el contenido 
-            string json = File.ReadAllText(ruta);
-            // Deserializa el contenido JSON en una lista de objetos Cadete
-            cadetes = JsonSerializer.Deserialize<List<Cadete>>(json);
-            
+            using (var archivoOpen = new FileStream(ruta, FileMode.Open))
+            {
+                using (var strReader = new StreamReader(archivoOpen))
+                {
+                    json = strReader.ReadToEnd();
+
+                }
+            }
+
+            var cadetes = JsonSerializer.Deserialize<List<Cadete>>(json);
+            return cadetes;
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Ocurrió un error al leer el archivo JSON: {ex.Message}");
+            Console.WriteLine($"Ocurrió un error al leer el archivo JSON- CADETE: {ex.Message}");
+            return null;
         }
-        
-        return cadetes;
+
     }
 
     public Cadeteria LeerCadeteria(string nombreArchivo)
     {
         string ruta = Path.Combine(CarpetaJSON, nombreArchivo);
-        Cadeteria cadeteria; 
-        
+        string json;
+
         if (!File.Exists(ruta))
         {
             Console.WriteLine($"El archivo {nombreArchivo} no existe.");
             return null; // Devuelve una cadena vacía si el archivo no existe
         }
 
-         try
-        { 
-            string json = File.ReadAllText(ruta);
-             cadeteria = JsonSerializer.Deserialize<Cadeteria>(json);
+        try
+        {
+            using (var archivoOpen = new FileStream(ruta, FileMode.Open))
+            {
+                using (var strReader = new StreamReader(archivoOpen))
+                {
+                      json = strReader.ReadToEnd();
+                }
+            }
+
+            var cadeteria = JsonSerializer.Deserialize<Cadeteria>(json);
             return cadeteria;
-            
+
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Ocurrió un error al leer el archivo JSON: {ex.Message}");
+            Console.WriteLine($"Ocurrió un error al leer el archivo JSON- CADETERIA: {ex.Message}");
             return null;
         }
     }

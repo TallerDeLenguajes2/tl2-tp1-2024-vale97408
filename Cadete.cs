@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 
 public class Cadete
 {
@@ -6,6 +7,9 @@ public class Cadete
     private string direccion;
     private string telefono;
 
+
+    // Constructor para deserialización JSON
+    [JsonConstructor]
     public Cadete(int id, string nombre, string direccion, string telefono)
     {
         this.id = id;
@@ -14,7 +18,7 @@ public class Cadete
         this.telefono = telefono;
     }
 
-    public Cadete () // Para la deserialización
+    public Cadete() // Para la deserialización
     {
 
     }
