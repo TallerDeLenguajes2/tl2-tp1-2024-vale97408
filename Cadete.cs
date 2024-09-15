@@ -9,7 +9,7 @@ public class Cadete
 
 
     // Constructor para deserialización JSON
-    [JsonConstructor]
+    [JsonConstructor] // Ver (?
     public Cadete(int id, string nombre, string direccion, string telefono)
     {
         this.id = id;

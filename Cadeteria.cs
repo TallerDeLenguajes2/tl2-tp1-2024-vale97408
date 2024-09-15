@@ -112,9 +112,9 @@ public class Cadeteria
             Console.WriteLine("No hay pedidos en el sistema para modificar.");
             return;
         }
-
+        Console.WriteLine("");
         Console.WriteLine("------REASIGNAR PEDIDOS--------");
-        Console.WriteLine("Ingrese el número del pedido a modificar: ");
+        Console.WriteLine("Ingrese el número del pedido a reasignar: ");
         if (!int.TryParse(Console.ReadLine(), out nroPedido))
         {
             Console.WriteLine("Número de pedido inválido.");
@@ -215,13 +215,16 @@ public class Cadeteria
     {
         // No puedo modificar el estado de un pedido entregado, en preparacion
 
+        Console.WriteLine("");
+         Console.WriteLine("------CAMBIAR ESTADO DE PEDIDO--------");
+
         if (ListadoPedidos.Count == 0 || ListadoPedidos == null)
         {
             Console.WriteLine("No hay pedidos en el sistema para modificar.");
             return;
         }
 
-        Console.WriteLine("Ingrese el número del pedido a modificar: ");
+        Console.WriteLine("Ingrese el número del pedido a modificar su estado: ");
         int nroPedido;
         if (!int.TryParse(Console.ReadLine(), out nroPedido))
         {
@@ -286,7 +289,7 @@ public class Cadeteria
 
         string observacionPedido, nombreCliente, direccionCliente, telefonoCliente, referenciaDireccion;
 
-        Console.WriteLine("=== Dar de Alta Pedido ===");
+         Console.WriteLine("------DAR DE ALTA PEDIDO--------");
 
         Console.WriteLine("Observación del pedido: ");
         observacionPedido = Console.ReadLine();
