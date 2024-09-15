@@ -1,4 +1,4 @@
-public class manejoAchivos
+public class AccesoDatosCSV : AccesoADatos
 {
     private const string CarpetaCSV = "ArchivosCSV/";
 
@@ -31,7 +31,6 @@ public class manejoAchivos
                 string linea;
                 while ((linea = strReader.ReadLine()) != null)
                 {
-                    // Supongamos que los datos están separados por punto y coma ';'
                     var datos = linea.Split(';');
 
                     if (datos.Length >= 4) // Asegurarse de que hay suficientes columnas para evitar errores
@@ -55,7 +54,6 @@ public class manejoAchivos
         string ruta = Path.Combine(CarpetaCSV, nombreArchivo);
         string infoCadeteria;
 
-        // Verificar si el archivo existe antes de intentar abrirlo
         if (!File.Exists(ruta))
         {
             Console.WriteLine($"El archivo {nombreArchivo} no existe.");

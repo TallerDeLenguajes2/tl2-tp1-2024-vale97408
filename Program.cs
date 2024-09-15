@@ -5,7 +5,7 @@
 string nombreArchivoCadetes = "cadetes.csv";
 string nombreArchivoCadeteria = "cadeteria.csv";
 
-manejoAchivos metodoCSV = new manejoAchivos();
+AccesoDatosCSV metodoCSV = new AccesoDatosCSV();
 
 // Controlo que los archivos existan. 
 if (metodoCSV.Existe(nombreArchivoCadetes) && metodoCSV.Existe(nombreArchivoCadeteria))
