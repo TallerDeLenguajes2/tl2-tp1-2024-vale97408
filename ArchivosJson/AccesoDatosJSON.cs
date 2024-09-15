@@ -1,7 +1,7 @@
 using System.Text.Json;
 public class AccesoDatosJSON : AccesoADatos
 {
-    private const string CarpetaJSON = "ArchivosJSON/";
+    private const string CarpetaJSON = "ArchivosJson/";
 
     public bool Existe(string nombreArchivo)
     {
