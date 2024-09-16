@@ -2,18 +2,9 @@
 Console.WriteLine("======= SISTEMA DE GESTIÓN DE PEDIDOS =======");
 
 int tipo;
-
-string nombreCadetesCSV = "cadetes.csv";
-string nombreCadeteriaCSV = "cadeteria.csv";
-AccesoDatosCSV metodoCSV = new AccesoDatosCSV();
-
-string nombreCadetesJSON = "cadetes.json";
-string nombreCadeteriaJSON = "cadeteria.json";
-AccesoDatosJSON metodoJSON = new AccesoDatosJSON();
-
+AccesoADatos AccesoDatos= null;
 List<Cadete> listaCadetes = null;
 Cadeteria cadeteria = null;
-
 
 Console.WriteLine(" Seleccione el Tipo de Acceso a los Datos que usará:");
 Console.WriteLine(" 1. Acceso CSV");
@@ -28,29 +19,13 @@ if (!int.TryParse(Console.ReadLine(), out tipo))
 switch (tipo)
 {
     case 1:
-        if (metodoCSV.Existe(nombreCadetesCSV) && metodoCSV.Existe(nombreCadeteriaCSV))
-        {
-            listaCadetes = metodoCSV.LeerCadetes(nombreCadetesCSV);
-            cadeteria = metodoCSV.LeerCadeteria(nombreCadeteriaCSV);
-            cadeteria.ListadoCadetes = listaCadetes;
-        }
-        else
-        {
-            Console.WriteLine("No existen los archivos CSV");
-        }
+        AccesoDatos = new AccesoDatosCSV();
+
 
         break;
     case 2:
-        if (metodoJSON.Existe(nombreCadetesJSON) && metodoJSON.Existe(nombreCadeteriaJSON))
-        {
-            listaCadetes = metodoJSON.LeerCadetes(nombreCadetesJSON);
-            cadeteria = metodoJSON.LeerCadeteria(nombreCadeteriaJSON);
-            cadeteria.ListadoCadetes = listaCadetes;
-        }
-        else
-        {
-            Console.WriteLine("No existen  los archivos JSON");
-        }
+        AccesoDatos = new AccesoDatosJSON();
+
 
         break;
     default:
@@ -58,6 +33,9 @@ switch (tipo)
         break;
 }
 
+listaCadetes = AccesoDatos.LeerCadetes();
+cadeteria = AccesoDatos.LeerCadeteria();
+cadeteria.ListadoCadetes = listaCadetes;
 
 
 // ----------MENU

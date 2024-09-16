@@ -3,10 +3,7 @@ public class Cadeteria
     private string nombre;
     private string telefono;
     private List<Cadete> listadoCadetes;
-
     private List<Pedido> listadoPedidos; // TP2
-
-// Saque el listado de cadetes
     public Cadeteria(string nombre, string telefono)
     {
         this.nombre = nombre;
@@ -15,10 +12,9 @@ public class Cadeteria
         ListadoPedidos = new List<Pedido>(); // Inicializo
     }
 
-    // No quiero que se admita modificación 
     public string Nombre { get => nombre; }
     public string Telefono { get => telefono; }
-    public List<Cadete> ListadoCadetes { get => listadoCadetes; set => listadoCadetes = value;}
+    public List<Cadete> ListadoCadetes { get => listadoCadetes; set => listadoCadetes = value; }
     public List<Pedido> ListadoPedidos { get => listadoPedidos; set => listadoPedidos = value; }
 
 
@@ -91,7 +87,7 @@ public class Cadeteria
         } while (!pedidoValido);
 
         Pedido pedidoAsignado = pedidosPendientes[seleccionPedido - 1];
-       
+
         AsignarCadeteAPedido(cadeteSeleccionado.Id, pedidoAsignado.NroPedido);
         pedidosPendientes.Remove(pedidoAsignado); // Eliminar de la lista de pendientes
 
@@ -216,7 +212,7 @@ public class Cadeteria
         // No puedo modificar el estado de un pedido entregado, en preparacion
 
         Console.WriteLine("");
-         Console.WriteLine("------CAMBIAR ESTADO DE PEDIDO--------");
+        Console.WriteLine("------CAMBIAR ESTADO DE PEDIDO--------");
 
         if (ListadoPedidos.Count == 0 || ListadoPedidos == null)
         {
@@ -289,7 +285,7 @@ public class Cadeteria
 
         string observacionPedido, nombreCliente, direccionCliente, telefonoCliente, referenciaDireccion;
 
-         Console.WriteLine("------DAR DE ALTA PEDIDO--------");
+        Console.WriteLine("------DAR DE ALTA PEDIDO--------");
 
         Console.WriteLine("Observación del pedido: ");
         observacionPedido = Console.ReadLine();

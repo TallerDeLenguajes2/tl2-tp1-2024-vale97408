@@ -2,22 +2,31 @@ public class AccesoDatosCSV : AccesoADatos
 {
     private const string CarpetaCSV = "ArchivosCSV/";
 
-    public bool Existe(string nombreArchivo)
+    
+    private string archivoCadeteriaCSV;
+
+    private string archivoCadetesCSV;
+
+    public AccesoDatosCSV()
     {
-        string ruta = Path.Combine(CarpetaCSV, nombreArchivo);
-          Console.WriteLine($"Ruta del archivo: {ruta}"); // Añadido para depuración
+        archivoCadeteriaCSV = "cadeteria.csv";
+        archivoCadetesCSV = "cadetes.csv";
+    }
+
+
+    public bool Existe(string ruta)
+    {
         return File.Exists(ruta);
     }
 
-    // Lee los datos de la cadetería desde un archivo CSV (puede ser solo una línea o varias)
-    public List<Cadete> LeerCadetes(string nombreArchivo)
+    public List<Cadete> LeerCadetes()
     {
-        string ruta = Path.Combine(CarpetaCSV, nombreArchivo);
+        string ruta = Path.Combine(CarpetaCSV, archivoCadetesCSV);
         List<Cadete> cadetes = new List<Cadete>();
 
-        if (!Existe(nombreArchivo))
+        if (!Existe(ruta))
         {
-            Console.WriteLine($"ACCESO DATOS CSV-El archivo {nombreArchivo} no existe.");
+            Console.WriteLine($"ACCESO DATOS CSV-El archivo {archivoCadetesCSV} no existe.");
             return cadetes; // Devuelve una lista vacía si el archivo no existe
         }
 
@@ -48,20 +57,20 @@ public class AccesoDatosCSV : AccesoADatos
 
         catch (Exception ex)
         {
-            Console.WriteLine($"Error al leer el archivo {nombreArchivo}: {ex.Message}");
+            Console.WriteLine($"Error al leer el archivo {archivoCadetesCSV}: {ex.Message}");
         }
 
         return cadetes;
     }
 
-    public Cadeteria LeerCadeteria(string nombreArchivo)
+    public Cadeteria LeerCadeteria()
     {
-        string ruta = Path.Combine(CarpetaCSV, nombreArchivo);
+        string ruta = Path.Combine(CarpetaCSV, archivoCadeteriaCSV);
         string datos;
 
-        if (!Existe(nombreArchivo))
+        if (!Existe(ruta))
         {
-            Console.WriteLine($"El archivo {nombreArchivo} no existe.");
+            Console.WriteLine($"El archivo {archivoCadeteriaCSV} no existe.");
             return null; // Devuelve una cadena vacía si el archivo no existe
         }
 
@@ -79,7 +88,7 @@ public class AccesoDatosCSV : AccesoADatos
 
             if (datosCadeteria.Length < 2)
             {
-                Console.WriteLine($"El archivo {nombreArchivo} no contiene información válida de la cadetería.");
+                Console.WriteLine($"El archivo {archivoCadeteriaCSV} no contiene información válida de la cadetería.");
                 return null;
             }
 
@@ -90,7 +99,7 @@ public class AccesoDatosCSV : AccesoADatos
 
         catch (Exception ex)
         {
-            Console.WriteLine($"Error al leer el archivo {nombreArchivo}: {ex.Message}");
+            Console.WriteLine($"Error al leer el archivo {archivoCadeteriaCSV}: {ex.Message}");
             return null;
         }
 

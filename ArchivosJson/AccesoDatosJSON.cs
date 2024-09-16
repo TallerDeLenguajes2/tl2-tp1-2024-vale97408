@@ -3,21 +3,30 @@ public class AccesoDatosJSON : AccesoADatos
 {
     private const string CarpetaJSON = "ArchivosJson/";
 
-    public bool Existe(string nombreArchivo)
+    private string archivoCadeteriaJson;
+
+    private string archivoCadetesJson;
+
+    public AccesoDatosJSON()
     {
-        string ruta = Path.Combine(CarpetaJSON, nombreArchivo);
+        archivoCadeteriaJson = "cadeteria.json";
+        archivoCadetesJson = "cadetes.json";
+    }
+
+    public bool Existe(string ruta)
+    {
         return File.Exists(ruta);
     }
 
     // Lee los datos de la cadetería desde un archivo JSOn
-    public List<Cadete> LeerCadetes(string nombreArchivo)
+    public List<Cadete> LeerCadetes( )
     {
-        string ruta = Path.Combine(CarpetaJSON, nombreArchivo);
+        string ruta = Path.Combine(CarpetaJSON, archivoCadetesJson);
         string json;
 
-        if (!Existe(nombreArchivo))
+        if (!Existe(ruta))
         {
-            Console.WriteLine($"El archivo {nombreArchivo} no existe.");
+            Console.WriteLine($"El archivo {archivoCadetesJson} no existe.");
             return null;
         }
 
@@ -43,14 +52,14 @@ public class AccesoDatosJSON : AccesoADatos
 
     }
 
-    public Cadeteria LeerCadeteria(string nombreArchivo)
+    public Cadeteria LeerCadeteria( )
     {
-        string ruta = Path.Combine(CarpetaJSON, nombreArchivo);
+        string ruta = Path.Combine(CarpetaJSON, archivoCadeteriaJson);
         string json;
 
-        if (!File.Exists(ruta))
+        if (!Existe(ruta))
         {
-            Console.WriteLine($"El archivo {nombreArchivo} no existe.");
+            Console.WriteLine($"El archivo {archivoCadeteriaJson} no existe.");
             return null; // Devuelve una cadena vacía si el archivo no existe
         }
 
