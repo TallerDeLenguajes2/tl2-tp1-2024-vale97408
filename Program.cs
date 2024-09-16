@@ -1,8 +1,9 @@
-﻿Console.Clear();
+﻿
+Console.Clear();
 Console.WriteLine("======= SISTEMA DE GESTIÓN DE PEDIDOS =======");
 
 int tipo;
-AccesoADatos AccesoDatos= null;
+AccesoADatos AccesoDatos = null;
 List<Cadete> listaCadetes = null;
 Cadeteria cadeteria = null;
 
@@ -70,22 +71,23 @@ do
     {
         case 1:
             nroPedido++;
-            cadeteria.DarDeAltaPedidos(nroPedido);
+            Pedido pedidoNuevo = Textos.DarDeAltaPedidos(nroPedido);
+            cadeteria.ListadoPedidos.Add(pedidoNuevo); // Tp2
             break;
         case 2:
-            cadeteria.AsignarPedidos();
+            Textos.AsignarPedidos(cadeteria);
             break;
         case 3:
-            cadeteria.ModificarEstadoPedido();
+            Textos.ModificarEstadoPedido(cadeteria.ListadoPedidos);
             break;
         case 4:
-            cadeteria.ReasignarPedidos();
+            Textos.ReasignarPedidos(cadeteria);
             break;
         case 5:
-            cadeteria.InformeFinalJornada();
+            Textos.InformeFinalJornada(cadeteria);
             break;
         case 6:
-            cadeteria.MostrarListadoPedidos();
+            Textos.MostrarListadoPedidos(cadeteria.ListadoPedidos);
             break;
 
         case 0:
